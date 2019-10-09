@@ -1,0 +1,12 @@
+#drop {
+    border-style: dashed;
+    border-color: black;
+    border-width: 1.5px;
+    background-color: #fdfbfb;
+}
+
+#suggest-tag {
+    margin: 0 auto;
+    width: 25%;
+    padding-top: 15px;
+}
