@@ -1,25 +1,22 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="container-fluid">
 
     <div class="row mt-3">
         <div class="col-sm-6 mx-auto">
             <form class="form-inline justify-content-center">
-                <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
+                <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
                 <i class="fas fa-search" aria-hidden="true"></i>
             </form>
         </div>
     </div>
 
     <div class="row mt-3">
-        <div class="col-sm mx-auto">
-            <ul class="list-group list-group-horizontal justify-content-center">
-                <li class="list-group-item"><a href="#">Suggested Tag 1</a></li>
-                <li class="list-group-item"><a href="#">Suggested Tag 2</a></li>
-                <li class="list-group-item"><a href="#">Suggested Tag 3</a></li>
-            </ul>
+        <div class="col-sm-4 mx-auto">
+            <div class="list-group list-group-horizontal justify-content-center">
+                <a href="#" class="list-group-item list-group-item-action">Suggested Tag 1</a>
+                <a href="#" class="list-group-item list-group-item-action">Suggested Tag 2</a>
+                <a href="#" class="list-group-item list-group-item-action">Suggested Tag 3</a>
+            </div>
         </div>
     </div>
 
