@@ -6,3 +6,6 @@ def index(request):
 
 def upload(request):
     return render(request, "upload.html", {})
+
+def image(request):
+    return render(request, 'image.html', {})

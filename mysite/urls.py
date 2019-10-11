@@ -20,5 +20,6 @@ from imageSearch import views
 urlpatterns = [
     path('', views.index, name="index"),
     path('upload', views.upload, name="upload"),
+    path('image', views.image, name="image"),
     path('admin/', admin.site.urls),
 ]
