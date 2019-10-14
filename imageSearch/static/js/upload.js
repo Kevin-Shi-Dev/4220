@@ -5,7 +5,7 @@ var deleteButton = document.getElementById("deleteAll");
 var imgForm = document.getElementById("imgForm");
 var tagBtn = document.getElementById("addTag");
 var tagTitle = document.getElementById("tagTitle")
-tagTitle.style.display = 'none';
+//tagTitle.style.display = 'none';
 buttonGrp.style.display = 'none';
 imgForm.style.display = 'none';
 
@@ -36,7 +36,7 @@ Dropzone.options.drop = {
         // This triggers when a file is removed. Checks to see if there are any files queued and hides the form/buttons accordingly
         this.on("removedfile", function() {
             if (myDropzone.files.length < 1) {
-                tagTitle.style.display = 'none';
+                //tagTitle.style.display = 'none';
                 buttonGrp.style.display = 'none';
                 imgForm.reset();
                 imgForm.style.display = 'none';
@@ -44,9 +44,19 @@ Dropzone.options.drop = {
         });
 
         // Prevents default auto submit of dropzone. It instead processes when clicking on the button
-        submitButton.addEventListener("click", function() {
+        submitButton.addEventListener("click", function(e) {
+			e.preventDefault();
             myDropzone.processQueue();
         });
+
+		this.on("sending", function(file, xhr, formData) {
+			console.log(file);
+			var data = $("#imgForm").serializeArray();
+			$.each(data, function(key, el) {
+				formData.append(el.name, el.value);
+			});
+			console.log(formData);
+		});
 
         // For the clear button
         deleteButton.addEventListener("click", function() {
@@ -54,16 +64,17 @@ Dropzone.options.drop = {
             document.getElementById("tags").innerHTML = "";
         });
 
-        tagBtn.addEventListener("click", function() {
-            var tag = document.getElementById("tag").value;
-            document.getElementById("tag").value = "";
+		// Commenting out for now - does not let us pass tags through the form doing it like this.
+        //tagBtn.addEventListener("click", function() {
+        //    var tag = document.getElementById("tag").value;
+        //    document.getElementById("tag").value = "";
 
-            if (tag != "") {
-                tagTitle.style.display = 'block';
-                document.getElementById("tags").innerHTML += '<li class="list-group-item list-group-item-dark">' + tag + '</li>'
-            }
+        //    if (tag != "") {
+        //        tagTitle.style.display = 'block';
+        //        document.getElementById("tags").innerHTML += '<li class="list-group-item list-group-item-dark">' + tag + '</li>'
+        //    }
 
-        });
+        //});
 
     }
 };
