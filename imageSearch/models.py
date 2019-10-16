@@ -1,5 +1,6 @@
 from django.db import models
 
+# Note: should've made the names singular but it's a bit late to fix it
 # Create your models here.
 class Tags(models.Model):
     tag_id = models.AutoField(primary_key=True)

@@ -2,31 +2,32 @@
 
 {% block content %}
 <div class="container-fluid">
-
-    <div class="row mt-3">
-        <div class="col-sm-6 mx-auto">
-            <form class="form-inline justify-content-center">
-                <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
-                <i class="fas fa-search" aria-hidden="true"></i>
-            </form>
-        </div>
-    </div>
-
-    <div class="row mt-3">
-        <div class="col-sm mx-auto">
-            <ul class="list-group list-group-horizontal justify-content-center">
-                <li class="list-group-item"><a href="#">Suggested Tag 1</a></li>
-                <li class="list-group-item"><a href="#">Suggested Tag 2</a></li>
-                <li class="list-group-item"><a href="#">Suggested Tag 3</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="row mt-3">
-        <div class="col-sm mx-auto">
-            <div class="text-center"><a href="{% url 'upload' %}"><button type="button" class="btn btn-dark">Upload Image</button></a></div>
-        </div>
+    <div class="col-sm-12 mx-auto">
+		<form action="/search" class="form-inline justify-content-center" method="post">{% csrf_token %}
+			<div class="col-sm-12">
+				<!-- TODO: Cleanup html look -->
+				<div class="form-group col-sm-4">
+					<input class="form-control form-control-sm" type="text" placeholder="Search term" aria-label="Search" name="search_term" />
+				</div>
+				<div class="form-group col-sm-4">
+					<label>Width at least:</label>
+					<input class="form-control form-control-sm mr-3 w-50" type="number" placeholder="0" name="width" />
+				</div>
+				<div class="form-group col-sm-4">
+					<label>Image type:</label>
+					<select class="form-control" name="img_type">
+						<option value="">Any</option>
+						<option value="jpg">JPG</option>
+						<option value="png">PNG</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-sm mx-auto">
+				<div class="text-center">
+					<button type="submit" class="btn btn-dark">Search Images</button>
+				</div>
+			</div>
+		</form>
     </div>
 </div>
 {% endblock %}

@@ -6,7 +6,7 @@ var imgForm = document.getElementById("imgForm");
 var tagBtn = document.getElementById("addTag");
 var tagTitle = document.getElementById("tagTitle")
 //tagTitle.style.display = 'none';
-buttonGrp.style.display = 'none';
+//buttonGrp.style.display = 'none';
 imgForm.style.display = 'none';
 
 // This modifies the default dropzone options
