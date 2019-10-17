@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="search-box">
     <div class="col-sm-12 mx-auto">
-		<form action="/search" class="form-inline justify-content-center" method="post">{% csrf_token %}
-			<div class="col-sm-12">
-				<!-- TODO: Cleanup html look -->
-				<div class="form-group col-sm-4">
+		<form action="/search" class="form-inline justify-content-start" method="post">{% csrf_token %}
+			<div class="lain-label">
+				<div class="form-group col-sm-4 justify-content-start">
+					<label class="lain-label">Search:</label>
 					<input class="form-control form-control-sm" type="text" placeholder="Search term" aria-label="Search" name="search_term" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Width at least:</label>
-					<input class="form-control form-control-sm mr-3 w-50" type="number" placeholder="0" name="width" />
+					<label class="lain-label">Width at least:</label>
+					<input class="form-control form-control-sm mr-3 w-100" type="number" placeholder="0" name="width" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Image type:</label>
+					<label class="lain-label">Image type:</label>
 					<select class="form-control" name="img_type">
 						<option value="">Any</option>
 						<option value="jpg">JPG</option>
@@ -23,11 +23,21 @@
 				</div>
 			</div>
 			<div class="col-sm mx-auto">
-				<div class="text-center">
+				<div class="lain-label">
+					<br>
 					<button type="submit" class="btn btn-dark">Search Images</button>
 				</div>
 			</div>
 		</form>
     </div>
 </div>
+
+
+	
+	<div class="trending-box list-group">
+		<label class="lain">Trending Tags</label>
+	  <a href="#" class="lain-label2">1. Funny</a>
+	  <a href="#" class="lain-label2">2. Cute</a>
+	  <a href="#" class="lain-label2">3. Scary</a>
+	</div>
 {% endblock %}
