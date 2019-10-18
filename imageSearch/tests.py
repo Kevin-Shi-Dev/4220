@@ -1,4 +1,5 @@
 from django.test import TestCase
+from imageSearch.views import get_img_type
 
 # Create your tests here.
 class ViewTestCase(TestCase):
@@ -11,3 +12,12 @@ class ViewTestCase(TestCase):
     def test_upload_page(self):
         response = self.client.get('/upload')
         self.assertEqual(response.status_code, 200)
+
+    def test_search_results(self):
+        response = self.client.post('/search', {'width': '700', 'img_type': ''})
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_image_type(self):
+        self.assertEqual(get_img_type('image/jpeg'), 'jpg')
+        self.assertEqual(get_img_type('image/png'), 'png')
+        self.assertEqual(get_img_type('image/gif'), '')

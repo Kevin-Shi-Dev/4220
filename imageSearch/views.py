@@ -30,7 +30,6 @@ def upload(request):
 
 def search(request):
     # TODO: Handle a get request - maybe make a page just for searching?
-    print(request.POST)
     width = 0
     img_type = ""
     if request.POST['width']:
@@ -57,7 +56,7 @@ def process_tags(img_id, t):
     # TODO: VERY IMPORTANT!!! Check for tags that ALREADY EXIST and USE THAT ID!
     # This means doing a lookup before the save call and only inserting if no record is found
     for tag in tags:
-        db_tag = Tags(tag_name=tag,weight=0)
+        db_tag = Tags(tag_name=strip(tag),weight=0)
         db_tag.save()
         img = Images.objects.get(image_id=img_id)
         img.tags.add(db_tag)
