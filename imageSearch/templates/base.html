@@ -9,41 +9,41 @@
     <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link href="{% static 'css/styles.css' %}" type="text/css" rel="stylesheet" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 
 <body>
-	<div class="title-box">
-		<h1 class="lain">Lain Systems Image Sharing</h1>
-	</div>
+    <div class="title-box">
+        <h1 class="lain">Lain Systems Image Sharing</h1>
+    </div>
 
-	<div class="nav-box">
-		<nav class="navbar navbar-expand-sm bg-transparent navbar-transparent">
-			<!-- Links -->
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="lain-nav" href="{% url 'index' %}">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="lain-nav" href="{% url 'upload' %}">Upload</a>
-				</li>
-				<li class="nav-item">
-					<a class="lain-nav" href="#">Gallery</a>
-				</li>
-				<li class="nav-item">
+    <div class="nav-box">
+        <nav class="navbar navbar-expand-sm bg-transparent navbar-transparent">
+            <!-- Links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="lain-nav" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="lain-nav" href="{% url 'upload' %}">Upload</a>
+                </li>
+                <li class="nav-item">
+                    <a class="lain-nav" href="#">Gallery</a>
+                </li>
+                <li class="nav-item">
                     <a class="lain-nav" href="mailto:admin@lainsystems.com?subject=Question From Image Sharing">Contact</a>
                 </li>
-			</ul>				
-		</nav>
-	</div>
-	
+            </ul>
+        </nav>
+    </div>
+
     <!-- This is where the main pages will extend from -->
     {% block content %}{% endblock %}
 
-		<script src="{% static 'js/dropzone.js' %}"></script>
-		<script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
-		<script src="{% static 'js/upload.js' %}"></script>
+    <script src="{% static 'js/dropzone.js' %}"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/upload.js' %}"></script>
 </body>
 
 </html>
