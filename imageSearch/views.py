@@ -32,13 +32,19 @@ def search(request):
     # TODO: Handle a get request - maybe make a page just for searching?
     width = 0
     img_type = ""
+    search_term = ""
     if request.POST['width']:
         width = int(request.POST['width'])
     if request.POST['img_type']:
         img_type = request.POST['img_type']
+    if request.POST['search_term']:
+        search_term = request.POST['search_term']
 
-    # TODO: Actually search by tags - this is the more complex case
+    searched_tag_id = Tags.objects.filter(tag_name=search_term)
+
     query = Images.objects.all()
+    if searched_tag_id:
+        query = query.filter(tags__in=searched_tag_id)
     if width > 0:
         query = query.filter(width__gte=width)
     if img_type:
@@ -51,15 +57,21 @@ def search(request):
     return render(request, "search_results.html", {'images': img_names})
 
 def process_tags(img_id, t):
-    tags = t.split(",")
+    tags = [x.strip() for x in t.split(",")]
 
-    # TODO: VERY IMPORTANT!!! Check for tags that ALREADY EXIST and USE THAT ID!
-    # This means doing a lookup before the save call and only inserting if no record is found
     for tag in tags:
-        db_tag = Tags(tag_name=strip(tag),weight=0)
-        db_tag.save()
-        img = Images.objects.get(image_id=img_id)
-        img.tags.add(db_tag)
+        # Check if we have the tag already
+        current_tag = Tags.objects.filter(tag_name=tag)
+        if not current_tag:
+            db_tag = Tags(tag_name=tag,weight=0)
+            db_tag.save()
+            img = Images.objects.get(image_id=img_id)
+            img.tags.add(db_tag)
+        else:
+            # If we have the tag, we associate it with the image
+            for t in current_tag:
+                img = Images.objects.get(image_id=img_id)
+                img.tags.add(t)
 
 def handle_uploaded_file(f):
     m = hashlib.md5()
