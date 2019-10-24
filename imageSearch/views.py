@@ -18,13 +18,14 @@ def upload(request):
     # Handle the upload
     if request.method == 'POST':
         saved_img = handle_uploaded_file(request.FILES['file'])
-        image_tags = process_tags(saved_img, request.POST['tags'])
+        image_tags = process_tags(saved_img.image_id, request.POST['tags'])
         # Uncomment print statements for web request debugging
         # print(request.POST)
-        # print(saved_img)
+        #print(saved_img)
         # TODO: Add upload success message
         # TODO: Fix redirect - doesn't work because request is sent via javascript maybe?
-        return render(request, "index.html", {}) # Redirect to home page
+        #return redirect ('/media/'+saved_img.image_hash + '.' + saved_img.image_type)
+        return render(request, "index.html", {})  # Redirect to home page
     else:
         return render(request, "upload.html", {})
 
@@ -99,7 +100,7 @@ def handle_uploaded_file(f):
     img = Images(image_hash=name,upload_time=datetime.datetime,weight=0,width=orig_width,height=orig_height,image_type=img_type)
     img.save()
 
-    return img.image_id
+    return img
 
 def get_img_type(mime_type):
     if mime_type == 'image/jpeg':
