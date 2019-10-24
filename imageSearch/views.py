@@ -94,7 +94,11 @@ def handle_uploaded_file(f):
     orig_height = im.height
     im.thumbnail((im.width * 0.15, im.height * 0.15), Image.ANTIALIAS)
     # TODO: Change this img type depending on whether it's jpeg / png
-    im.save(thumb_path, "JPEG")
+    print(img_type)
+    if (str(img_type).upper() =='png'):
+        im.save(thumb_path, "PNG")
+    elif (str(img_type).upper() == 'JPEG'):
+        im.save(thumb_path, "JPEG")
 
     # Insert image into database, return image id
     img = Images(image_hash=name,upload_time=datetime.datetime,weight=0,width=orig_width,height=orig_height,image_type=img_type)
