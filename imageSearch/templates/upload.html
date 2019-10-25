@@ -1,38 +1,44 @@
 {% extends "base.html" %} {% block title %}Upload{% endblock %} {% block content %}
-<div class="container-fluid">
-    <div class="row mt-3">
-        <div class="col-sm-6 mx-auto text-center align-items-center">
-            <div class="align-middle">
-                <form action="/upload" class="dropzone" id="drop" enctype="multipart/form-data">{% csrf_token %}
-                    <div class="dz-message align-middle" data-dz-message><span>Drag or click to upload...</span></div>
-                </form>
+<div class="upload-box">
+    <div class="container-fluid">
+       <div class="row mt-3">
+	    <div class="col-sm-6 mx-auto text-center align-items-center">
+	        <div class="align-middle">
+		    <form action="/upload" class="dropzone" id="drop" enctype="multipart/form-data">{% csrf_token %}
+		        <div class="dz-message align-middle" data-dz-message><span>Drag or click to upload...</span></div>
+		    </form>
+		</div>
             </div>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-sm-6 mx-auto text-center align-items-center">
-            <form action="" id="imgForm">
-                <div class="form-group">
-                    <label for="name">Image Name:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
-                </div>
-                <div class="form-group">
-                    <label for="tags">Add Tags:</label>
-                    <input type="text" class="form-control" id="tags" placeholder="Enter tags, comma separated" name="tags">
-					<br />
-					<!-- NOTE: See upload.js file, adding tags like this does not let us easily upload them -->
-					<!--<button type="button" class="btn btn-dark" id="addTag">Add tag</button>
+	</div>
+	<div class="row mt-3">
+	    <div class="col-sm-6 mx-auto text-center align-items-center">
+	        <form action="" id="imgForm">
+		    <div class="form-row">
+		        <label class="lain-label3" for="name">Image Name:</label>
+			<input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+		     </div>
+		    <div class="form-row">
+		        <label class="lain-label3" for="tags">Add Tags:</label>
+			<input type="text" class="form-control" id="tags" placeholder="Enter tags, comma separated" name="tags">
+			<br />
+						<!-- NOTE: See upload.js file, adding tags like this does not let us easily upload them -->
+						<!--<button type="button" class="btn btn-dark" id="addTag">Add tag</button>
 
-                    <br>
-                    <label for="tags" id="tagTitle">Tags:</label>
-                    <ul class="list-group" id="tags">
-					</ul>-->
-                </div>
-            </form>
-            <div class="btn-group" id="btnGrp" style="padding-bottom:10px;">
-                <button type="button" class="btn btn-dark" id="submitAll">Submit</button>
-                <button type="button" class="btn btn-dark" id="deleteAll">Clear</button>
-            </div>
+						<br>
+						<label for="tags" id="tagTitle">Tags:</label>
+						<ul class="list-group" id="tags">
+						</ul>-->
+		    </div>
+		    <div class="form-check">
+		        <input class="form-check-input" type="checkbox" value="" id="copy" required>
+			<label class="lain-label3" for="copy">I have read the terms and conditions and confirm this image is copyright cleared</label>
+		    </div>
+		</form>
+		<div class="btn-group" id="btnGrp" style="padding-bottom:10px;">
+		    <button type="submit" class="btn btn-dark" id="submitAll">Submit</button>
+		    <button type="button" class="btn btn-dark" id="deleteAll">Clear</button>
+	       </div>
+	    </div>
         </div>
     </div>
 </div>

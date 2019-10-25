@@ -50,6 +50,22 @@
 	
 }
 
+.lain-label3 {
+	font-size: 14px;
+	font-family: "Courior New";
+	color: White;
+	width: 450px;
+	text-align: left;
+}
+
+.form-row {
+	padding-bottom: 12px;
+}
+
+.form-check-input {
+    margin-top: .45rem;
+}
+
 .title-box {
 	width: 440px;
 	padding: 10px;
@@ -75,6 +91,17 @@
 	background-color: Black;
 }
 
+.upload-box {
+	padding: 10px;
+	border: 5px solid gray;
+	margin: 25px;
+	background-color: Black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+
 .trending-box {
 	width: 25%;
 	padding: 10px;
@@ -86,8 +113,21 @@
 }
 
 .navbar-nav > li{
-  padding-left: 170px;
-  padding-right: 170px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.nav-item{
+  padding-left: 150%;
+  padding-right: 150%;
+}
+
+.form-check-label{
+	padding-bottom: 4%;
+}
+
+html {
+	height: 100%;
 }
 
 html {
