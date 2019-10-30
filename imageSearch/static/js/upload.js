@@ -64,7 +64,8 @@ Dropzone.options.drop = {
             //console.log(file);
             console.log(responseText);
             //window.location.href = '/media/'+responseText['id'];
-             window.open('/media/'+responseText['id'])
+             window.open('/media/'+responseText['id']);
+             alert("Images Uploaded");
         });
         // For the clear button
         deleteButton.addEventListener("click", function() {
