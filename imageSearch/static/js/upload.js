@@ -47,6 +47,8 @@ Dropzone.options.drop = {
         submitButton.addEventListener("click", function(e) {
 			e.preventDefault();
             myDropzone.processQueue();
+            //myDropzone.removeAllFiles(true);
+
         });
 
 		this.on("sending", function(file, xhr, formData) {
@@ -57,7 +59,13 @@ Dropzone.options.drop = {
 			});
 			console.log(formData);
 		});
-
+        this.on('success', function(file,responseText) {
+            //console.log("test");
+            //console.log(file);
+            console.log(responseText);
+            //window.location.href = '/media/'+responseText['id'];
+             window.open('/media/'+responseText['id'])
+        });
         // For the clear button
         deleteButton.addEventListener("click", function() {
             myDropzone.removeAllFiles(true);
