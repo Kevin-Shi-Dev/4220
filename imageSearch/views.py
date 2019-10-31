@@ -61,7 +61,6 @@ def search(request):
 
 def process_tags(img_id, t):
     tags = [x.strip() for x in t.split(",")]
-
     for tag in tags:
         # Check if we have the tag already
         current_tag = Tags.objects.filter(tag_name=tag)

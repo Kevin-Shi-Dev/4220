@@ -4,10 +4,22 @@ var submitButton = document.getElementById("submitAll");
 var deleteButton = document.getElementById("deleteAll");
 var imgForm = document.getElementById("imgForm");
 var tagBtn = document.getElementById("addTag");
-var tagTitle = document.getElementById("tagTitle")
+var tagTitle = document.getElementById("tagTitle");
+var blocktagging = document.getElementById("blocktagging");
+
 //tagTitle.style.display = 'none';
 //buttonGrp.style.display = 'none';
 imgForm.style.display = 'none';
+blocktagging.style.visibility = 'hidden';
+buttonGrp.style.display = 'none';
+
+
+const tagblockContainer = document.querySelector('.tagblock-container');
+const input = document.querySelector('.tagblock-container input');
+
+let tagblocks = [];
+
+
 
 // This modifies the default dropzone options
 Dropzone.options.drop = {
@@ -25,6 +37,7 @@ Dropzone.options.drop = {
             // Show the buttons and forms
             buttonGrp.style.display = "block";
             imgForm.style.display = 'block';
+            blocktagging.style.visibility = 'visible';
 
             // If trying to add more than one, remove
             if (myDropzone.files.length > 10) {
@@ -40,13 +53,29 @@ Dropzone.options.drop = {
                 buttonGrp.style.display = 'none';
                 imgForm.reset();
                 imgForm.style.display = 'none';
+                blocktagging.style.visibility = 'hidden';
+
             }
         });
 
         // Prevents default auto submit of dropzone. It instead processes when clicking on the button
         submitButton.addEventListener("click", function(e) {
+
+            var i;
+            var tmp =""
+            for(i=0; i < tagblocks.length; i++){
+                tmp = tmp +tagblocks[i]
+                if (i+1 < tagblocks.length) {
+                    tmp = tmp + ', '
+                }
+            }
+            console.log(tmp)
+            document.getElementById("HTMLtags").value = tmp;
+
+
 	    e.preventDefault();
 	    myDropzone.processQueue();
+
             //myDropzone.removeAllFiles(true);
 
         });
@@ -70,7 +99,7 @@ Dropzone.options.drop = {
         // For the clear button
         deleteButton.addEventListener("click", function() {
             myDropzone.removeAllFiles(true);
-            document.getElementById("tags").innerHTML = "";
+            document.getElementById("HTMLtags").innerHTML = "";
         });
 
 		// Commenting out for now - does not let us pass tags through the form doing it like this.
@@ -87,3 +116,52 @@ Dropzone.options.drop = {
 
     }
 };
+
+function createtagblock(label) {
+  const div = document.createElement('div');
+  div.setAttribute('class', 'tagblock');
+  const span = document.createElement('span');
+  span.innerHTML = label;
+  const closeIcon = document.createElement('i');
+  closeIcon.innerHTML = 'X';
+  closeIcon.setAttribute('class', 'material-icons');
+  closeIcon.setAttribute('data-item', label);
+  div.appendChild(span);
+  div.appendChild(closeIcon);
+  return div;
+}
+
+function cleartagblocks() {
+  document.querySelectorAll('.tagblock').forEach(tagblock => {
+    tagblock.parentElement.removeChild(tagblock);
+  });
+}
+
+function addtagblocks() {
+  cleartagblocks();
+  tagblocks.slice().reverse().forEach(tagblock => {
+    tagblockContainer.prepend(createtagblock(tagblock));
+  });
+}
+
+input.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      e.target.value.split(',').forEach(tagblock => {
+        tagblocks.push(tagblock);
+      });
+
+      addtagblocks();
+      input.value = '';
+    }
+});
+document.addEventListener('click', (e) => {
+  console.log(e.target.tagblockName);
+  if (e.target.tagblockName === 'I') {
+    const tagblockLabel = e.target.getAttribute('data-item');
+    const index = tagblocks.indexOf(tagblockLabel);
+    tagblocks = [...tagblocks.slice(0, index), ...tagblocks.slice(index+1)];
+    addtagblocks();
+  }
+})
+
+input.focus();
