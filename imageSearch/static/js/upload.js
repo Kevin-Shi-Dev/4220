@@ -4,7 +4,7 @@ var submitButton = document.getElementById("submitAll");
 var deleteButton = document.getElementById("deleteAll");
 var imgForm = document.getElementById("imgForm");
 var tagBtn = document.getElementById("addTag");
-var tagTitle = document.getElementById("tagTitle")
+var tagTitle = document.getElementById("tagTitle");
 //tagTitle.style.display = 'none';
 //buttonGrp.style.display = 'none';
 imgForm.style.display = 'none';
@@ -46,7 +46,9 @@ Dropzone.options.drop = {
         // Prevents default auto submit of dropzone. It instead processes when clicking on the button
         submitButton.addEventListener("click", function(e) {
 	    e.preventDefault();
-	    myDropzone.processQueue();
+	    if(document.getElementById("copy").value!=''){
+		    myDropzone.processQueue();
+	    }
             //myDropzone.removeAllFiles(true);
 
         });
