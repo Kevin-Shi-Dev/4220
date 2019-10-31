@@ -4,7 +4,7 @@ var submitButton = document.getElementById("submitAll");
 var deleteButton = document.getElementById("deleteAll");
 var imgForm = document.getElementById("imgForm");
 var tagBtn = document.getElementById("addTag");
-var tagTitle = document.getElementById("tagTitle");
+var tagTitle = document.getElementById("tagTitle")
 //tagTitle.style.display = 'none';
 //buttonGrp.style.display = 'none';
 imgForm.style.display = 'none';
@@ -15,7 +15,7 @@ Dropzone.options.drop = {
     acceptedFiles: "image/*",
     paramName: "file",
     uploadMultiple: false,
-    maxFiles: 10,
+    maxFiles: 1,
     init: function() {
         var myDropzone = this;
 
@@ -27,9 +27,9 @@ Dropzone.options.drop = {
             imgForm.style.display = 'block';
 
             // If trying to add more than one, remove
-            if (myDropzone.files.length > 10) {
+            if (myDropzone.files.length > 1) {
                 myDropzone.removeFile(file);
-                alert("You may only upload ten pictures at a time")
+                alert("You may only upload one picture at a time")
             }
         });
 
@@ -43,13 +43,10 @@ Dropzone.options.drop = {
             }
         });
 
-	    
         // Prevents default auto submit of dropzone. It instead processes when clicking on the button
         submitButton.addEventListener("click", function(e) {
-		e.preventDefault();
-		myDropzone.processQueue();
-            //myDropzone.removeAllFiles(true);
-
+			e.preventDefault();
+            myDropzone.processQueue();
         });
 
 		this.on("sending", function(file, xhr, formData) {
@@ -60,14 +57,7 @@ Dropzone.options.drop = {
 			});
 			console.log(formData);
 		});
-        this.on('success', function(file,responseText) {
-            //console.log("test");
-            //console.log(file);
-            console.log(responseText);
-            //window.location.href = '/media/'+responseText['id'];
-             window.open('/media/'+responseText['id']);
-             alert("Images Uploaded");
-        });
+
         // For the clear button
         deleteButton.addEventListener("click", function() {
             myDropzone.removeAllFiles(true);
