@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from PIL import Image
 from imageSearch.models import Images, Tags, ImageHasTags
 import hashlib
@@ -20,12 +20,14 @@ def upload(request):
         saved_img = handle_uploaded_file(request.FILES['file'])
         image_tags = process_tags(saved_img.image_id, request.POST['tags'])
         # Uncomment print statements for web request debugging
-        # print(request.POST)
+        #print("RUNNING")
         #print(saved_img)
         # TODO: Add upload success message
         # TODO: Fix redirect - doesn't work because request is sent via javascript maybe?
         #return redirect ('/media/'+saved_img.image_hash + '.' + saved_img.image_type)
-        return render(request, "index.html", {})  # Redirect to home page
+        message = saved_img.image_hash + '.' + saved_img.image_type
+        #print(message)
+        return JsonResponse({'id':message})
     else:
         return render(request, "upload.html", {})
 
@@ -94,7 +96,7 @@ def handle_uploaded_file(f):
     orig_height = im.height
     im.thumbnail((im.width * 0.15, im.height * 0.15), Image.ANTIALIAS)
     # TODO: Change this img type depending on whether it's jpeg / png
-    #print(img_type)
+    #print("TEST")
     im.save(thumb_path)
 
     # Insert image into database, return image id
