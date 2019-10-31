@@ -6,6 +6,7 @@ var imgForm = document.getElementById("imgForm");
 var tagBtn = document.getElementById("addTag");
 var tagTitle = document.getElementById("tagTitle");
 var blocktagging = document.getElementById("blocktagging");
+var checkboxtext = document.getElementById("copy");
 
 //tagTitle.style.display = 'none';
 //buttonGrp.style.display = 'none';
@@ -60,23 +61,26 @@ Dropzone.options.drop = {
 
         // Prevents default auto submit of dropzone. It instead processes when clicking on the button
         submitButton.addEventListener("click", function(e) {
-
-            var i;
-            var tmp =""
-            for(i=0; i < tagblocks.length; i++){
-                tmp = tmp +tagblocks[i]
-                if (i+1 < tagblocks.length) {
-                    tmp = tmp + ', '
+            if (checkboxtext.checked == true) {
+                var i;
+                var tmp = "";
+                for (i = 0; i < tagblocks.length; i++) {
+                    tmp = tmp + tagblocks[i];
+                    if (i + 1 < tagblocks.length) {
+                        tmp = tmp + ', '
+                    }
                 }
+                console.log(tmp);
+                document.getElementById("HTMLtags").value = tmp;
+                checkboxtext.checked = false;
+
+                e.preventDefault();
+                myDropzone.processQueue();
+
+                //myDropzone.removeAllFiles(true);
+            }else {
+                alert("You must agree to copywrite")
             }
-            console.log(tmp)
-            document.getElementById("HTMLtags").value = tmp;
-
-
-	    e.preventDefault();
-	    myDropzone.processQueue();
-
-            //myDropzone.removeAllFiles(true);
 
         });
 
@@ -100,6 +104,8 @@ Dropzone.options.drop = {
         deleteButton.addEventListener("click", function() {
             myDropzone.removeAllFiles(true);
             document.getElementById("HTMLtags").innerHTML = "";
+            tagblocks =[];
+            addtagblocks();
         });
 
 		// Commenting out for now - does not let us pass tags through the form doing it like this.
@@ -123,7 +129,7 @@ function createtagblock(label) {
   const span = document.createElement('span');
   span.innerHTML = label;
   const closeIcon = document.createElement('i');
-  closeIcon.innerHTML = 'X';
+  closeIcon.innerHTML = '';
   closeIcon.setAttribute('class', 'material-icons');
   closeIcon.setAttribute('data-item', label);
   div.appendChild(span);
