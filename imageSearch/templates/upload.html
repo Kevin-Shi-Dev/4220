@@ -10,16 +10,25 @@
 		</div>
             </div>
 	</div>
-	<div class="row mt-3">
+
 	    <div class="col-sm-6 mx-auto text-center align-items-center">
-	        <form action="" id="imgForm">
+            <div class="container" id="blocktagging">
+              <br />
+                Enter the image tags, Press enter after each tag
+              <br />
+              <div class="tagblock-container">
+                <input  />
+              </div>
+
+            </div>
+            <form action="" id="imgForm">
 		    <div class="form-row">
 		        <label class="lain-label3" for="name">Image Name:</label>
 			<input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
 		     </div>
-		    <div class="form-row">
-		        <label class="lain-label3" for="tags">Add Tags:</label>
-			<input type="text" class="form-control" id="tags" placeholder="Enter tags, comma separated" name="tags">
+		    <div class="form-row" style="display: none;">
+		        <label class="lain-label3" for="HTMLtags">Add Tags:</label>
+			<input type="text" class="form-control" id="HTMLtags" placeholder="Enter tags, comma separated" name="tags">
 			<br />
 						<!-- NOTE: See upload.js file, adding tags like this does not let us easily upload them -->
 						<!--<button type="button" class="btn btn-dark" id="addTag">Add tag</button>
@@ -40,6 +49,7 @@
 	       </div>
 	    </div>
         </div>
+
     </div>
 </div>
 {% endblock %}

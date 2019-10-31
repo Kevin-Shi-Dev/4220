@@ -132,6 +132,53 @@
 	padding-bottom: 4%;
 }
 
+.container {
+    font-size: 14px;
+	font-family: "Courior New";
+	color: White;
+	text-align: left;
+
+}
+.tagblock-container {
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding: 6px;
+  overflow-x: scroll;
+}
+.tagblock-container .tagblock {
+  height: 30px;
+  margin: 5px;
+  padding: 5px 6px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  color: #333;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 1px 1px #fff;
+  cursor: default;
+}
+.tagblock i {
+  font-size: 16px;
+  color: #666;
+  margin-left: 5px;
+}
+.tagblock-container input {
+  padding: 5px;
+  font-size: 16px;
+  border: 0;
+  outline: none;
+  color: #333;
+  flex: 1;
+}
+
+
+
+
 html {
 	height: 100%;
 }
