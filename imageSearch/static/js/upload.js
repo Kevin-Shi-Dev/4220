@@ -43,10 +43,24 @@ Dropzone.options.drop = {
             }
         });
 
+	$(document).ready(function () {
+
+            $('#imgForm').validate({
+                rules: {
+                    copy: {
+                        required: true
+                    }
+            },
+            submitHandler: function(form) {
+                form.submit()
+            }
+        });
+
+	    
         // Prevents default auto submit of dropzone. It instead processes when clicking on the button
         submitButton.addEventListener("click", function(e) {
-		    e.preventDefault();
-		    myDropzone.processQueue();
+		e.preventDefault();
+		myDropzone.processQueue();
             //myDropzone.removeAllFiles(true);
 
         });
