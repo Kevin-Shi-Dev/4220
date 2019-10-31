@@ -15,7 +15,7 @@ Dropzone.options.drop = {
     acceptedFiles: "image/*",
     paramName: "file",
     uploadMultiple: false,
-    maxFiles: 1,
+    maxFiles: 10,
     init: function() {
         var myDropzone = this;
 
@@ -27,9 +27,9 @@ Dropzone.options.drop = {
             imgForm.style.display = 'block';
 
             // If trying to add more than one, remove
-            if (myDropzone.files.length > 1) {
+            if (myDropzone.files.length > 10) {
                 myDropzone.removeFile(file);
-                alert("You may only upload one picture at a time")
+                alert("You may only upload ten pictures at a time")
             }
         });
 
