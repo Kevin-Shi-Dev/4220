@@ -45,8 +45,10 @@ Dropzone.options.drop = {
 
         // Prevents default auto submit of dropzone. It instead processes when clicking on the button
         submitButton.addEventListener("click", function(e) {
-			e.preventDefault();
-            myDropzone.processQueue();
+	    e.preventDefault();
+            if(document.getElementById("copy").value!=''){
+		myDropzone.processQueue();
+	    }
             //myDropzone.removeAllFiles(true);
 
         });
