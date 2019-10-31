@@ -13,8 +13,16 @@ class ViewTestCase(TestCase):
         response = self.client.get('/upload')
         self.assertEqual(response.status_code, 200)
 
-    def test_search_results(self):
-        response = self.client.post('/search', {'width': '700', 'img_type': ''})
+    def test_search_results_width(self):
+        response = self.client.post('/search', {'search_term': '', 'width': '700', 'img_type': ''})
+        self.assertEqual(response.status_code, 200)
+
+    def test_search_results_term(self):
+        response = self.client.post('/search', {'search_term': 'senko', 'width': '0', 'img_type': ''})
+        self.assertEqual(response.status_code, 200)
+
+    def test_search_results_type(self):
+        response = self.client.post('/search', {'search_term': '', 'width': '0', 'img_type': 'png'})
         self.assertEqual(response.status_code, 200)
 
     def test_get_image_type(self):
