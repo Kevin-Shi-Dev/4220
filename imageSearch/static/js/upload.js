@@ -79,7 +79,7 @@ Dropzone.options.drop = {
 
                 //myDropzone.removeAllFiles(true);
             }else {
-                alert("You must agree to copywrite")
+                alert("You must agree to the Copyright")
             }
 
         });
