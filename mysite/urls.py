@@ -23,5 +23,6 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('upload', views.upload, name="upload"),
     path('search', views.search, name="search"),
+    path('display/<str:img_id>', views.display, name="display"),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)

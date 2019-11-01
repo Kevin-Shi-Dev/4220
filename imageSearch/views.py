@@ -14,6 +14,9 @@ module_dir = os.path.dirname(__file__)
 def index(request):
     return render(request, "index.html", {})
 
+def display(request, img_id):
+    return render(request, "display.html", {'img': img_id})
+
 def upload(request):
     # Handle the upload
     if request.method == 'POST':
@@ -57,7 +60,7 @@ def search(request):
     for img in query:
         img_names.append(img.image_hash + '.' + img.image_type)
 
-    return render(request, "search_results.html", {'images': img_names})
+    return render(request, "search_results.html", {'images': img_names })
 
 def process_tags(img_id, t):
     tags = [x.strip() for x in t.split(",")]
