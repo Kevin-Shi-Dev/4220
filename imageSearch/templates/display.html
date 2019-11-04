@@ -3,8 +3,9 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row mt-3">
-        <div class="col-sm-6 mx-auto">
-			<img src="/media/{{ img }}" style="border: 2px solid #000000;" />			
+        <div class="col-sm-6 mx-auto text-center">
+            <img src="/media/{{ img }}" style="border: 2px solid #000000;width:800px;height:600px;" />
+            <a href="mailto:admin@lainsystems.com?subject=Reporting of image: {{ img }}"><button class="btn btn-dark" >Report NSFW</button></a>		
         </div>
     </div>
 </div>

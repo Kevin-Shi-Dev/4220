@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from PIL import Image
 from imageSearch.models import Images, Tags, ImageHasTags
+from PIL import Image
 import hashlib
 import os
 import datetime
@@ -9,33 +9,50 @@ import datetime
 # For uploads to save properly
 module_dir = os.path.dirname(__file__)
 
-# TODO: Split functions into different files to keep code organized
-# Create your views here.
 def index(request):
     return render(request, "index.html", {})
 
 def display(request, img_id):
     return render(request, "display.html", {'img': img_id})
 
-def upload(request):
-    # Handle the upload
-    if request.method == 'POST':
-        saved_img = handle_uploaded_file(request.FILES['file'])
-        image_tags = process_tags(saved_img.image_id, request.POST['tags'])
-        # Uncomment print statements for web request debugging
-        #print("RUNNING")
-        #print(saved_img)
-        # TODO: Add upload success message
-        # TODO: Fix redirect - doesn't work because request is sent via javascript maybe?
-        #return redirect ('/media/'+saved_img.image_hash + '.' + saved_img.image_type)
-        message = saved_img.image_hash + '.' + saved_img.image_type
-        #print(message)
-        return JsonResponse({'id':message})
+def gallery(request):
+    if request.method == "GET":
+        query = Images.objects.all()
+        img_names = []
+        for img in query:
+            img_names.append(img.image_hash + '.' + img.image_type)
+
+        return render(request, "gallery.html", {'images': img_names })
+    # If this was a real project I'd get rid of the code duplication and make a library or something. I'm sorry!
     else:
-        return render(request, "upload.html", {})
+        width = 0
+        img_type = ""
+        search_term = ""
+        if request.POST['width']:
+            width = int(request.POST['width'])
+        if request.POST['img_type']:
+            img_type = request.POST['img_type']
+        if request.POST['search_term']:
+            search_term = request.POST['search_term']
+
+        searched_tag_id = Tags.objects.filter(tag_name=search_term)
+
+        query = Images.objects.all()
+        if searched_tag_id:
+            query = query.filter(tags__in=searched_tag_id)
+        if width > 0:
+            query = query.filter(width__gte=width)
+        if img_type:
+            query = query.filter(image_type=img_type)
+
+        img_names = []
+        for img in query:
+            img_names.append(img.image_hash + '.' + img.image_type)
+
+        return render(request, "gallery.html", {'images': img_names })
+
 
 def search(request):
-    # TODO: Handle a get request - maybe make a page just for searching?
     width = 0
     img_type = ""
     search_term = ""
@@ -61,6 +78,23 @@ def search(request):
         img_names.append(img.image_hash + '.' + img.image_type)
 
     return render(request, "search_results.html", {'images': img_names })
+
+def upload(request):
+    # Handle the upload
+    if request.method == 'POST':
+        saved_img = handle_uploaded_file(request.FILES['file'])
+        image_tags = process_tags(saved_img.image_id, request.POST['tags'])
+        # Uncomment print statements for web request debugging
+        #print("RUNNING")
+        #print(saved_img)
+        # TODO: Add upload success message
+        # TODO: Fix redirect - doesn't work because request is sent via javascript maybe?
+        #return redirect ('/media/'+saved_img.image_hash + '.' + saved_img.image_type)
+        message = saved_img.image_hash + '.' + saved_img.image_type
+        #print(message)
+        return JsonResponse({'id':message})
+    else:
+        return render(request, "upload.html", {})
 
 def process_tags(img_id, t):
     tags = [x.strip() for x in t.split(",")]
