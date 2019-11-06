@@ -29,3 +29,11 @@ class ViewTestCase(TestCase):
         self.assertEqual(get_img_type('image/jpeg'), 'jpg')
         self.assertEqual(get_img_type('image/png'), 'png')
         self.assertEqual(get_img_type('image/gif'), '')
+
+    def test_gallery_get(self):
+        response = self.client.get('/gallery')
+        self.assertEqual(response.status_code, 200)
+
+    def test_gallery_post(self):
+        response = self.client.post('/gallery', {'search_term': 'senko', 'width': '0', 'img_type': ''})
+        self.assertEqual(response.status_code, 200)
