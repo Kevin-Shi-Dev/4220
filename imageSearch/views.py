@@ -13,7 +13,12 @@ def index(request):
     return render(request, "index.html", {})
 
 def display(request, img_id):
-    return render(request, "display.html", {'img': img_id})
+    img_hash = img_id.split('.')[0]
+    img = Images.objects.filter(image_hash=img_hash)
+
+    tags = ", ".join(tag.tag_name for tag in img[0].tags.all())
+    
+    return render(request, "display.html", {'img': img_id, 'type': img[0].image_type, 'height': img[0].height, 'width': img[0].width, 'tags': tags})
 
 def gallery(request):
     if request.method == "GET":
