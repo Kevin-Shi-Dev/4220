@@ -20,6 +20,9 @@ def display(request, img_id):
     
     return render(request, "display.html", {'img': img_id, 'type': img[0].image_type, 'height': img[0].height, 'width': img[0].width, 'tags': tags})
 
+def contact(request):
+    return render(request, "contact.html", {})
+
 def gallery(request):
     if request.method == "GET":
         query = Images.objects.all()
