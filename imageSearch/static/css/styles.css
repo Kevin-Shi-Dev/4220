@@ -129,6 +129,16 @@
 	transform: translate(175%, -120%);
 }
 
+.img-box {
+	width: 25%;
+	padding: 10px;
+	border: 5px solid gray;
+	margin: 25px;
+	background-color: Black;
+	text-align: center;
+	transform: translate(175%, -75%);
+}
+
 .navbar-nav > li{
   padding-left: 100px;
   padding-right: 100px;

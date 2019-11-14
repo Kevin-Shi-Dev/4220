@@ -1,3 +1,7 @@
+
+import base64
+import codecs
+import operator
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -13,22 +17,38 @@ import codecs
 module_dir = os.path.dirname(__file__)
 
 def index(request):
-    return render(request, "index.html", {})
+    query = Images.objects.all()
+    ordred =  sorted(query, key=operator.attrgetter('weight'),reverse=True)
+    img_names = []
+    for img in ordred:
+        #print(img.weight)
+        img_names.append(img.image_hash + '.' + img.image_type)
+
+    img1 = img_names[0]
+    img2 = img_names[1]
+    img3 = img_names[2]
+
+    return render(request, "index.html", {'img1': img1,'img2': img2, 'img3' : img3})
 
 def short(request, img_id):
-    img = Images.objects.filter(image_url = img_id)
-    print(img)
-    tags = ", ".join(tag.tag_name for tag in img[0].tags.all())
-    return render(request, "display.html", {'img': img[0].image_hash +'.'+img[0].image_type, 'type': img[0].image_type, 'height': img[0].height, 'width': img[0].width, 'tags': tags, 'short_url' : img[0].image_url})
+    img = Images.objects.filter(image_url = img_id)[0]
+    #print(img)
+    tags = ", ".join(tag.tag_name for tag in img.tags.all())
+    img.weight = img.weight +1
+    img.save()
+    return render(request, "display.html", {'img': img.image_hash +'.'+img.image_type, 'type': img.image_type, 'height': img.height, 'width': img.width, 'tags': tags, 'short_url' : img.image_url})
 
 
 def display(request, img_id):
     img_hash = img_id.split('.')[0]
-    img = Images.objects.filter(image_hash=img_hash)
+    img = Images.objects.filter(image_hash=img_hash)[0]
 
-    tags = ", ".join(tag.tag_name for tag in img[0].tags.all())
-    
-    return render(request, "display.html", {'img': img_id, 'type': img[0].image_type, 'height': img[0].height, 'width': img[0].width, 'tags': tags, 'short_url' : img[0].image_url})
+    tags = ", ".join(tag.tag_name for tag in img.tags.all())
+
+    img.weight = img.weight + 1
+    img.save()
+
+    return render(request, "display.html", {'img': img_id, 'type': img.image_type, 'height': img.height, 'width': img.width, 'tags': tags, 'short_url' : img.image_url})
 
 def contact(request):
     return render(request, "contact.html", {})
@@ -136,6 +156,9 @@ def handle_uploaded_file(f):
     m.update(f.name.encode())
     name = m.hexdigest()
     short_url = str(base64.urlsafe_b64encode(codecs.decode(name, 'hex')))[2:-3]
+
+    #print(short_url)
+
 
     # TODO: Check invalid mimetype / raise error to user
     img_type = get_img_type(f.content_type)
