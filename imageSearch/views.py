@@ -1,7 +1,8 @@
+
 import base64
 import codecs
 import operator
-
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from imageSearch.models import Images, Tags, ImageHasTags
@@ -9,6 +10,8 @@ from PIL import Image
 import hashlib
 import os
 import datetime
+import base64
+import codecs
 
 # For uploads to save properly
 module_dir = os.path.dirname(__file__)
@@ -71,6 +74,9 @@ def gallery(request):
             search_term = request.POST['search_term']
 
         searched_tag_id = Tags.objects.filter(tag_name=search_term)
+        if not searched_tag_id and width == 0 and img_type == '':
+            messages.error(request, "We couldn't find the tag '" + search_term + "'")
+            return redirect("/gallery")
 
         query = Images.objects.all()
         if searched_tag_id:
@@ -100,6 +106,11 @@ def search(request):
 
     searched_tag_id = Tags.objects.filter(tag_name=search_term)
 
+    if not searched_tag_id and width == 0 and img_type == '':
+        messages.error(request, "We couldn't find the tag '" + search_term + "'")
+        return redirect("/")
+
+
     query = Images.objects.all()
     if searched_tag_id:
         query = query.filter(tags__in=searched_tag_id)
@@ -119,14 +130,7 @@ def upload(request):
     if request.method == 'POST':
         saved_img = handle_uploaded_file(request.FILES['file'])
         image_tags = process_tags(saved_img.image_id, request.POST['tags'])
-        # Uncomment print statements for web request debugging
-        #print("RUNNING")
-        #print(saved_img)
-        # TODO: Add upload success message
-        # TODO: Fix redirect - doesn't work because request is sent via javascript maybe?
-        #return redirect ('/media/'+saved_img.image_hash + '.' + saved_img.image_type)
         message = saved_img.image_hash + '.' + saved_img.image_type
-        #print(message)
         return JsonResponse({'id':message})
     else:
         return render(request, "upload.html", {})
@@ -152,7 +156,9 @@ def handle_uploaded_file(f):
     m.update(f.name.encode())
     name = m.hexdigest()
     short_url = str(base64.urlsafe_b64encode(codecs.decode(name, 'hex')))[2:-3]
+
     #print(short_url)
+
 
     # TODO: Check invalid mimetype / raise error to user
     img_type = get_img_type(f.content_type)
@@ -168,9 +174,7 @@ def handle_uploaded_file(f):
     # Retain original width / height otherwise they get modified and put in the db incorrectly
     orig_width = im.width
     orig_height = im.height
-    im.thumbnail((im.width * 0.15, im.height * 0.15), Image.ANTIALIAS)
-    # TODO: Change this img type depending on whether it's jpeg / png
-    #print("TEST")
+    im.thumbnail((150,150), Image.ANTIALIAS)
     im.save(thumb_path)
 
     # Insert image into database, return image id
