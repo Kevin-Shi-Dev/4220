@@ -214,3 +214,8 @@ body {
   background-attachment: fixed;
   background-size: 90% 100%;
 }
+
+#message {
+	width: 60%;
+	margin: 0 auto;
+}
