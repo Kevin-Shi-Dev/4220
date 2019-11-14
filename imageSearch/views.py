@@ -1,3 +1,6 @@
+import base64
+import codecs
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from imageSearch.models import Images, Tags, ImageHasTags
@@ -12,13 +15,20 @@ module_dir = os.path.dirname(__file__)
 def index(request):
     return render(request, "index.html", {})
 
+def short(request, img_id):
+    img = Images.objects.filter(image_url = img_id)
+    print(img)
+    tags = ", ".join(tag.tag_name for tag in img[0].tags.all())
+    return render(request, "display.html", {'img': img[0].image_hash +'.'+img[0].image_type, 'type': img[0].image_type, 'height': img[0].height, 'width': img[0].width, 'tags': tags, 'short_url' : img[0].image_url})
+
+
 def display(request, img_id):
     img_hash = img_id.split('.')[0]
     img = Images.objects.filter(image_hash=img_hash)
 
     tags = ", ".join(tag.tag_name for tag in img[0].tags.all())
     
-    return render(request, "display.html", {'img': img_id, 'type': img[0].image_type, 'height': img[0].height, 'width': img[0].width, 'tags': tags})
+    return render(request, "display.html", {'img': img_id, 'type': img[0].image_type, 'height': img[0].height, 'width': img[0].width, 'tags': tags, 'short_url' : img[0].image_url})
 
 def contact(request):
     return render(request, "contact.html", {})
@@ -124,6 +134,9 @@ def handle_uploaded_file(f):
     m = hashlib.md5()
     m.update(f.name.encode())
     name = m.hexdigest()
+    short_url = str(base64.urlsafe_b64encode(codecs.decode(name, 'hex')))[2:-3]
+    print(short_url)
+
     # TODO: Check invalid mimetype / raise error to user
     img_type = get_img_type(f.content_type)
     file_path = os.path.join(module_dir, 'media', name + '.' + img_type)
@@ -144,7 +157,7 @@ def handle_uploaded_file(f):
     im.save(thumb_path)
 
     # Insert image into database, return image id
-    img = Images(image_hash=name,upload_time=datetime.datetime,weight=0,width=orig_width,height=orig_height,image_type=img_type)
+    img = Images(image_hash=name,upload_time=datetime.datetime,weight=0,width=orig_width,height=orig_height,image_type=img_type,image_url= short_url)
     img.save()
 
     return img
