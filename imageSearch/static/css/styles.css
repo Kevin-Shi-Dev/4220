@@ -136,7 +136,7 @@
 	margin: 25px;
 	background-color: Black;
 	text-align: center;
-	transform: translate(175%, 0%);
+	transform: translate(175%, -75%);
 }
 
 .navbar-nav > li{
