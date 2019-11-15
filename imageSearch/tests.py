@@ -35,5 +35,9 @@ class ViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_gallery_post(self):
-        response = self.client.post('/gallery', {'search_term': 'senko', 'width': '0', 'img_type': ''})
+        response = self.client.post('/gallery', {'search_term': '', 'width': '0', 'img_type': ''})
+        self.assertEqual(response.status_code, 200)
+
+    def test_contact(self):
+        response = self.client.get('/contact')
         self.assertEqual(response.status_code, 200)
