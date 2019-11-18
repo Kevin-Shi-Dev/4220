@@ -140,8 +140,8 @@
 }
 
 .navbar-nav > li{
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 150%;
+  padding-right: 150%;
 }
 
 .nav-item{
