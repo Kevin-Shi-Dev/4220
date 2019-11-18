@@ -139,14 +139,14 @@
 	transform: translate(175%, -75%);
 }
 
-.navbar-nav > li{
+.nav-item{
   padding-left: 150%;
   padding-right: 150%;
 }
 
-.nav-item{
-  padding-left: 150%;
-  padding-right: 150%;
+.navbar-nav > li{
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 .form-check-label{
