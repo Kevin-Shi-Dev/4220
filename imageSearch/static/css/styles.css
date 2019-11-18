@@ -126,7 +126,7 @@
 	margin: 25px;
 	background-color: Black;
 	text-align: center;
-	transform: translate(175%, -120%);
+	transform: translate(175%, -110%);
 }
 
 .img-box {
@@ -136,7 +136,7 @@
 	margin: 25px;
 	background-color: Black;
 	text-align: center;
-	transform: translate(175%, -75%);
+	transform: translate(175%, -65%);
 }
 
 .nav-item{
