@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-sm-6 mx-auto text-center align-items-center">
+	<div class="contact-box">
+		<h1 class="lain"> Contact Us </h1>
+		<form action="mailto:admin@lainsystems.com" method="post" enctype="text/plain">
+		    <div class="form-row">
+			    <label for="name" class="lain-label3"> Name: </label>
+			    <input type="text" class="form-control" name="name" id="name"/>
+				<br/>
+			</div>
+			<div class="form-row">
+			    <label for="email" class="lain-label3"> Email: </label>
+			    <input type="text" class="form-control" name="email" id="email"/>
+				<br/>
+			</div>
+			<div class="form-row">
+			    <label for="body" class="lain-label3"> Body: </label>
+			    <textarea rows="6" cols="35" class="form-control" name="body" id="body"/>Message..</textarea>
+				<br/>
+			</div>
+			<p><input type="submit" name="submit" value="Send" />
+            <input type="reset" name="reset" value="Clear Form" />
+            </p>
+	</div>
+</div>
+{% endblock %}

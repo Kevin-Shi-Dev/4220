@@ -5,7 +5,7 @@
     <div class="row mt-3">
         <div class="col-sm-6 mx-auto">
 			{% for img in images %}
-				<img src='/media/thumbs/thumb_{{ img }}' style='border: 2px solid #dedede;' />
+				<a href="/display/{{ img }}" target="new"><img src='/media/thumbs/thumb_{{ img }}' style='border: 2px solid #dedede;' /></a>
 			{% endfor %}
         </div>
     </div>

@@ -15,13 +15,8 @@ class Images(models.Model):
     width = models.IntegerField()
     height = models.IntegerField()
     image_type = models.CharField(max_length=5)
+    image_url = models.CharField(max_length=255)
     tags = models.ManyToManyField(Tags, through='ImageHasTags')
-
-class Urls(models.Model):
-    url_id = models.AutoField(primary_key=True)
-    short_url = models.CharField(max_length=255)
-    url = models.CharField(max_length=500)
-    image = models.OneToOneField(Images, on_delete=models.CASCADE, to_field='image_id')
 
 class ImageHasTags(models.Model):
     image = models.ForeignKey(Images, on_delete=models.CASCADE, to_field='image_id')
