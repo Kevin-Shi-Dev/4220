@@ -97,6 +97,10 @@
 	background-color: Black;
 }
 
+.footer-box {
+	width: 100%
+}
+
 .upload-box {
 	padding: 10px;
 	border: 5px solid gray;
