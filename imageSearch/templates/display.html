@@ -1,38 +1,40 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="container-fluid dsp-box">
+<div class="container-fluid">
 
     <div class="row mt-3">
         <div class="col-sm-6 mx-auto text-center">
 			<a href="/media/{{ img }}" target="_blank"><img src="/media/{{ img }}" style="border: 2px solid #000000;width:800px;height:600px;" /></a>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col-sm mx-auto text-center">
-            <h3><b>Type: {{ type }}</b></h3>
-        </div>
-        <div class="col-sm mx-auto text-center">
-            <h3><b>Dimensions: {{ width }}x{{ height }}</b></h3>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-sm-6 mx-auto text-center">
-            <h3><b>Tags: {{ tags }}</b></h3>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-sm-6 mx-auto text-center">
-            <h3><b>Image Url: http://lainsystems.com:8000/short/{{ short_url }}</b></h3>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-sm-6 mx-auto text-center">
-            <a target="_blank"  href="http://twitter.com/share?text=Hey look at this Image!&url=http://lainsystems.com:8000/display/{{ img }}"><button class="btn btn-dark" >Tweet</button></a>
-            <div class="fb-share-button" data-href="http://lainsystems.com:8000/display/{{ img }}" data-layout="button" data-size="large">
-                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flainsystems.com%3A8000%2Fdisplay%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><button class="btn btn-dark" >Share</button></a></div>
-                <a href="mailto:admin@lainsystems.com?subject=Reporting of image: {{ img }}"><button class="btn btn-dark" >Report NSFW</button></a>
-            </div>
-        </div>
-    </div>
+    <div class="dsp-box">
+	    <div class="row mt-3">
+		<div class="col-sm mx-auto text-center">
+		    <h3><b>Type: {{ type }}</b></h3>
+		</div>
+		<div class="col-sm mx-auto text-center">
+		    <h3><b>Dimensions: {{ width }}x{{ height }}</b></h3>
+		</div>
+	    </div>
+	    <div class="row mt-3">
+		<div class="col-sm-6 mx-auto text-center">
+		    <h3><b>Tags: {{ tags }}</b></h3>
+		</div>
+	    </div>
+	    <div class="row mt-3">
+		<div class="col-sm-6 mx-auto text-center">
+		    <h3><b>Image Url: http://lainsystems.com:8000/short/{{ short_url }}</b></h3>
+		</div>
+	    </div>
+	    <div class="row mt-3">
+		<div class="col-sm-6 mx-auto text-center">
+		    <a target="_blank"  href="http://twitter.com/share?text=Hey look at this Image!&url=http://lainsystems.com:8000/display/{{ img }}"><button class="btn btn-dark" >Tweet</button></a>
+		    <div class="fb-share-button" data-href="http://lainsystems.com:8000/display/{{ img }}" data-layout="button" data-size="large">
+			<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flainsystems.com%3A8000%2Fdisplay%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><button class="btn btn-dark" >Share</button></a></div>
+			<a href="mailto:admin@lainsystems.com?subject=Reporting of image: {{ img }}"><button class="btn btn-dark" >Report NSFW</button></a>
+		    </div>
+		</div>
+	    </div>
+     </div>
 </div>
 {% endblock %}
