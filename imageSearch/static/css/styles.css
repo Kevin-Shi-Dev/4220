@@ -143,6 +143,14 @@
 	transform: translate(0%, -65%);
 }
 
+.dsp-box {
+	width: 1000px;
+	padding: 10px;
+	border: 5px solid gray;
+	margin: 25px;
+	background-color: Black;
+}
+
 .nav-item{
   padding-left: 150%;
   padding-right: 150%;
