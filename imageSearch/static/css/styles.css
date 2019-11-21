@@ -64,6 +64,12 @@
 	color: White;
 }
 
+.lain-body {
+	font-size: 24px;
+	font-family: "Courior New";
+	color: White;
+}
+
 .form-row {
 	padding-bottom: 12px;
 }
