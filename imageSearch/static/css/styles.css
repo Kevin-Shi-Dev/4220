@@ -71,6 +71,13 @@
 	word-wrap: break-word;
 }
 
+.lain-body2 {
+	font-size: 8px;
+	font-family: "Courior New";
+	color: White;
+	word-wrap: break-word;
+}
+
 .form-row {
 	padding-bottom: 12px;
 }
